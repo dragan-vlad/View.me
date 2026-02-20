@@ -223,6 +223,7 @@ section {
     align-items: center;
     justify-content: center;
     will-change: transform, opacity;
+    isolation: isolate;
 }
 
 .hero-inner {
@@ -268,7 +269,7 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 10px 40px rgba(0, 0, 0, 0);
 
     isolation: isolate; 
     -webkit-font-smoothing: antialiased;
