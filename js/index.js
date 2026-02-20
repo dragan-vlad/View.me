@@ -1,31 +1,37 @@
-window.addEventListener('DOMContentLoaded', () => {
-    const heroInner = document.querySelector('.hero-inner');
+// 1. Loading screen
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader');
+    const progress = document.querySelector('.loader-progress');
     
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, { threshold: 0.1 });
-
-    heroInner.style.opacity = '0';
-    heroInner.style.transform = 'translateY(20px)';
-    heroInner.style.transition = 'all 1s cubic-bezier(0.22, 1, 0.36, 1)';
-    
-    observer.observe(heroInner);
+    let width = 0;
+    const interval = setInterval(() => {
+        width += Math.random() * 25;
+        if (width >= 100) {
+            width = 100;
+            clearInterval(interval);
+            setTimeout(() => {
+                loader.classList.add('finished');
+            }, 500);
+        }
+        progress.style.width = width + '%';
+    }, 100);
 });
 
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        nav.style.padding = '0.5rem 10%';
-        nav.style.background = 'rgba(1, 4, 25, 0.98)';
-        nav.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+// 2. Parallax & Lip Logic (Native Sync)
+wwindow.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const vh = window.innerHeight;
+    
+    const layerBg = document.querySelector('.layer-bg');
+
+    // Only execute if we are in or near the Hero
+    if (scrollY <= vh) {
+        // CLAMP: translateY(0) is the limit. It can't go negative (overlap the top).
+        const bgMove = Math.max(0, scrollY * 0.2);
+        layerBg.style.transform = `translateY(${bgMove}px) scale(${1 + scrollY / 5000})`;
     } else {
-        nav.style.padding = '0.6rem 10%';
-        nav.style.background = 'rgba(1, 4, 25, 0.95)';
-        nav.style.borderBottom = '1px solid rgba(255, 255, 255, 0.05)';
+        // If we've scrolled past the hero, reset hero styles to "hidden/away" 
+        // to prevent ghosting if the user scrolls back up very fast.
+        layerBg.style.opacity = "0";
     }
 });
