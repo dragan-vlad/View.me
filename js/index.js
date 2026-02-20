@@ -18,7 +18,7 @@ window.addEventListener('load', () => {
 });
 
 // 2. Parallax & Lip Logic (Native Sync)
-wwindow.addEventListener('scroll', () => {
+window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     const vh = window.innerHeight;
     
