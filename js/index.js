@@ -26,7 +26,7 @@ window.addEventListener('scroll', () => {
 
     // Only execute if we are in or near the Hero
     if (scrollY <= vh) {
-        // CLAMP: translateY(0) is the limit. It can't go negative (overlap the top).
+        layerBg.style.opacity = "1";
         const bgMove = Math.max(0, scrollY * 0.2);
         layerBg.style.transform = `translateY(${bgMove}px) scale(${1 + scrollY / 5000})`;
     } else {
