@@ -49,9 +49,37 @@
     </section>
 
     <section class="next-level">
-        
+        <div class="dashboard-container">
+            <div class="metrics-row">
+                <div class="card metric"><span class="num">32</span><span class="lbl">Total Projects</span></div>
+                <div class="card metric completed"><span class="num">7</span><span class="lbl">Completed</span></div>
+                <div class="card metric progress"><span class="num">15</span><span class="lbl">In Progress</span></div>
+                <div class="card metric hold"><span class="num">5</span><span class="lbl">At Risk / Hold</span></div>
+            </div>
+            
+            <div class="main-grid">
+                <div class="card chart-card">
+                    <h3>Project Status</h3>
+                    <div class="chart-wrapper"><canvas id="projectChart"></canvas></div>
+                </div>
+                <div class="card tasks-card">
+                    <h3>Tasks By Status</h3>
+                    <div class="task-rows">
+                        <div class="task-row">
+                            <div class="task-meta"><span>Project Active</span><span>57%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" data-target="89" style="background:#00dff3"></div></div>
+                        </div>
+                        <div class="task-row">
+                            <div class="task-meta"><span>Automation Queue</span><span>85%</span></div>
+                            <div class="bar-bg"><div class="bar-fill" data-target="100" style="background:#fcf1e5"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
     <script src="js/index.js"></script>

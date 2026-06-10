@@ -35,3 +35,33 @@ window.addEventListener('scroll', () => {
         layerBg.style.opacity = "0";
     }
 });
+
+const ctx = document.getElementById('projectChart');
+if (ctx) {
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Completed', 'In Progress', 'At Risk'],
+            datasets: [{
+                data: [7, 15, 5],
+                backgroundColor: ['#4caf50', '#00dff3', '#f44336'],
+                borderWidth: 0,
+                cutout: '70%'
+            }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: '#fcf1e5', font: { size: 10 } } } } }
+    });
+}
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+                bar.style.width = bar.getAttribute('data-target') + '%';
+            });
+        }
+    });
+}, { threshold: 0.15 });
+
+const targetSec = document.querySelector('.next-level');
+if (targetSec) observer.observe(targetSec);
