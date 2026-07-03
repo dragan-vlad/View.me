@@ -1,0 +1,14 @@
+[
+    {
+        "id": "handstand",
+        "name": "handstand",
+        "type": "goal",
+        "parents": ["exe-pike-pushup"]
+    },
+    {
+        "id": "exe-pike-pushup",
+        "name": "pike-pushup",
+        "type": "exercise",
+        "perents": null
+    }
+]
