@@ -1,0 +1,9 @@
+[
+  {
+    "id": "rule_1",
+    "enabled": true,
+    "category": "MONEY",
+    "match_field": "from",
+    "match_value": "dedalus online"
+  }
+]
