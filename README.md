@@ -51,11 +51,10 @@ Open your browser or Ctr+click / Cmd+click on the terminal link to open in your 
 - [ ] Sketch and map out the full calisthenics skill progression data points inside `commands.json`.
 - [ ] Connect the frontend landing page to dynamically pull project card data from the `/api/exercises`.
 - [ ] Build the JavaScript visualization canvas to render calisthenics exercises as an interactive multi-parent graph web.
-- [ ] Build a visual UI panel to view and append rules to the email checklist API (/api/checklist).
+- [ ] Build a visual UI panel to view and append rules to the email checklist API `/api/checklist`.
 - [ ] Seamlessly merge this landing page to another dashboard project.
 - [ ] Implement local folder-tiling structural views for easier dashboard navigation.
 - [ ] Integrate user tracking to mark movements as `unlocked` or `completed` in real time.
-- [ ] Design and implement a mobile-responsive daily logging module to schedule workouts, track real-time activities, and synchronize active metrics.
 - [ ] Build a modular language acquisition tracker featuring visual progress metrics, streak counts, and milestone validation bars.
 - [ ] Integrate a centralized script and automation database with advanced local query search and syntax-highlighted algorithm previews.
 - [ ] Refactor the core landing page layout into a production-grade showcase, integrating custom viewport cursor trackers and layered parallax depth effects.
