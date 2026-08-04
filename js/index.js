@@ -65,3 +65,105 @@ const observer = new IntersectionObserver((entries) => {
 
 const targetSec = document.querySelector('.next-level');
 if (targetSec) observer.observe(targetSec);
+
+// Checklist API Operations
+let activeRules = [];
+let isLoaded = false;
+
+async function fetchChecklist() {
+    try {
+        const response = await fetch('/api/mail-checklist');
+        if (response.ok) {
+            activeRules = await response.json();
+            isLoaded = true;
+            renderRules();
+        } else {
+            console.error('Failed to load rules, status:', response.status);
+        }
+    } catch (err) {
+        console.error('Failed to load checklist rules:', err);
+    }
+}
+
+async function saveChecklist() {
+    if (!isLoaded && activeRules.length === 0) {
+        console.warn('Blocked save: State not fetched from server yet.');
+        return;
+    }
+
+    try {
+        await fetch('/api/mail-checklist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(activeRules)
+        });
+        renderRules();
+    } catch (err) {
+        console.error('Failed to update checklist:', err);
+    }
+}
+
+function renderRules() {
+    const listContainer = document.getElementById('ruleList');
+    if (!listContainer) return;
+
+    if (activeRules.length === 0) {
+        listContainer.innerHTML = `<div style="opacity:0.6; font-size:0.8rem; padding:0.5rem;">No active rules configured.</div>`;
+        return;
+    }
+
+    listContainer.innerHTML = activeRules.map((rule, idx) => `
+        <div class="rule-item">
+            <div class="rule-info">
+                <span class="badge">${rule.category}</span>
+                <span>${rule.match_field}: <strong>${rule.match_value}</strong></span>
+            </div>
+            <div class="rule-actions">
+                <input type="checkbox" ${rule.enabled ? 'checked' : ''} onchange="toggleRule(${idx})">
+                <button type="button" class="btn-delete" onclick="deleteRule(${idx})">&times;</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+window.toggleRule = function(index) {
+    activeRules[index].enabled = !activeRules[index].enabled;
+    saveChecklist();
+};
+
+window.deleteRule = function(index) {
+    activeRules.splice(index, 1);
+    saveChecklist();
+};
+
+// Modal Controls & DOM Ready
+document.addEventListener('DOMContentLoaded', () => {
+    fetchChecklist();
+
+    const modal = document.getElementById('ruleModal');
+    const openBtn = document.getElementById('openRuleModal');
+    const closeBtn = document.getElementById('closeRuleModal');
+    const ruleForm = document.getElementById('ruleForm');
+
+    if (openBtn && modal) openBtn.onclick = () => modal.classList.add('active');
+    if (closeBtn && modal) closeBtn.onclick = () => modal.classList.remove('active');
+
+    if (ruleForm) {
+        ruleForm.onsubmit = (e) => {
+            e.preventDefault();
+            const newRule = {
+                id: `rule_${Date.now()}`,
+                enabled: true,
+                category: document.getElementById('ruleCategory').value,
+                match_field: document.getElementById('ruleField').value,
+                match_value: document.getElementById('ruleValue').value
+            };
+            activeRules.push(newRule);
+            saveChecklist();
+            ruleForm.reset();
+            modal.classList.remove('active');
+        };
+    }
+});

@@ -75,6 +75,42 @@
                         </div>
                     </div>
                 </div>
+                <div class="card checklist-card">
+                    <div class="card-header">
+                        <h3>Email Notification Rules</h3>
+                        <button id="openRuleModal" class="btn-sm" type="button">+ New Rule</button>
+                    </div>
+                    <div class="rules-list" id="ruleList">
+                        <!-- Dinamically populated via JS -->
+                    </div>
+                </div>
+                <div id="ruleModal" class="modal">
+                    <div class="modal-content card">
+                        <h3>Add Checklist Trigger</h3>
+                        <form id="ruleForm">
+                            <div class="form-group">
+                                <label>Category Label</label>
+                                <input type="text" id="ruleCategory" placeholder="e.g. URGENT" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Match Target</label>
+                                <select id="ruleField">
+                                    <option value="from">Sender (From)</option>
+                                    <option value="subject">Subject Line</option>
+                                    <option value="body">Email Body</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Keyword / Value</label>
+                                <input type="text" id="ruleValue" placeholder="e.g. security@target.com" required>
+                            </div>
+                            <div class="modal-actions">
+                                <button type="button" id="closeRuleModal" class="btn-sm">Cancel</button>
+                                <button type="submit" class="btn-sm btn-accent">Save Rule</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
