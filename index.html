@@ -1,123 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View.me</title>
-    <link rel="stylesheet" href="css/index.css">
-</head>
-<body>
 
-    <div class="loader">
-        <div class="loader-content">
-            <div class="loader-logo">View<span>.me</span></div>
-            <div class="loader-bar"><div class="loader-progress"></div></div>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vlad Dragan - Portfolio</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="brand-container">
+      <div class="logo">View<span>.me</span></div>
+      <div class="status-bubble">
+        <span class="dot"></span>Available for projects
+      </div>
     </div>
 
-    <header class="navbar">
-        <div class="brand-container">
-            <div class="logo">View<span>.me</span></div>
-            <div class="status-bubble">
-                <span class="dot"></span>Available for projects
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <div class="nav-divider"></div>
+      <a href="#projects">Projects</a>
+      <div class="nav-divider"></div>
+      <a href="#about">About me</a>
+      <div class="nav-divider"></div>
+      <a href="app.html">Dashboard</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a href="mailto:vladgdragan@gmail.com" class="btn-sm">Contact</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="layer layer-bg"></div>
+    <div class="layer layer-content">
+      <div class="hero-inner">
+        <h1>Driven by relentless curiosity</h1>
+        <p>I engineer high-impact solutions that bridge the gap between complex problems and seamless efficiency
+        </p>
+      </div>
+      <div class="entrance-lip"></div>
+    </div>
+
+  </section>
+
+  <!-- DASHBOARD PREVIEW -->
+  <section class="dashboard-preview">
+    <div class="dashboard-container">
+      <div class="metrics-row">
+        <div class="card metric"><span class="num">32</span><span class="lbl">Total Projects</span></div>
+        <div class="card metric completed"><span class="num">7</span><span class="lbl">Completed</span></div>
+        <div class="card metric progress"><span class="num">15</span><span class="lbl">In Progress</span></div>
+        <div class="card metric hold"><span class="num">5</span><span class="lbl">At Risk / Hold</span></div>
+      </div>
+
+      <div class="main-grid">
+        <div class="card chart-card">
+          <h3>Project Status</h3>
+          <div class="chart-wrapper"><canvas id="projectChart"></canvas></div>
+        </div>
+        <div class="card tasks-card">
+          <h3>Tasks By Status</h3>
+          <div class="task-rows">
+            <div class="task-row">
+              <div class="task-meta"><span>Project Active</span><span>57%</span></div>
+              <div class="bar-bg">
+                <div class="bar-fill" data-target="89" style="background:#00dff3"></div>
+              </div>
             </div>
+            <div class="task-row">
+              <div class="task-meta"><span>Automation Queue</span><span>85%</span></div>
+              <div class="bar-bg">
+                <div class="bar-fill" data-target="100" style="background:#fcf1e5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARALAXX WORDS -->
+  <section class="parallax-words">
+    <div class="parallax-words-inner">
+      <div class="word-group">
+        <span class="word weight-light">I</span>
+        <span class="word weight-black">BUILd</span>
+      </div>
+      <div class="word-group">
+        <span class="word weight-light">I</span>
+        <span class="word weight-black">LEARN</span>
+      </div>
+      <div class="word-group">
+        <span class="word weight-light">I</span>
+        <span class="word weight-black">COMPETE</span>
+      </div>
+      <div class="word-group">
+        <span class="word weight-light">relentlesly</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="projects">
+    <div class="projects-header">
+      <h2>Projects</h2>
+    </div>
+    <div class="card-container">
+      <div class="fan-card" onclick="window.open('URL', '_blank')">
+        <div class="card-content">
+          <h3>WINGS</h3>
+          <p>Self-improvement tracker built as a living daily tool / Train.Learn.Track.Repeat</p>
+          <div class="card-tags">
+            <span class="tag">Rust</span>
+            <span class="tag">JS</span>
+          </div>
+        </div>
+      </div>
+      <div class="fan-card" onclick="window.open('URL', '_blank')">
+        <div class="card-content">
+          <h3>PROJECT</h3>
+          <p>IoT automation system built from scratch</p>
+          <div class="card-tags">
+            <span class="tag">C++</span>
+          </div>
+        </div>
+      </div>
+      <div class="fan-card" onclick="window.open('URL', '_blank')">
+        <div class="card-content">
+          <h3>PROJECT</h3>
+          <p>Cybersecurity analysis tool and network scanner.</p>
+          <div class="card-tags">
+            <span class="tag">Python</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about-left">
+      <h2>About me</h2>
+      <p>I am a 3rd-year Computer Science and Automatics
+        student currently working in the industry as an
+        R&D Programmer. Driven by a deep fascination with
+        technology, I am a self-taught builder who loves
+        exploring interconnected systems and developing
+        custom IoT projects from scratch. My long-term
+        vision is to leverage this systems-level
+        understanding to transition into the Cybersecurity
+        field.
+        I approach engineering with a highly analytical,
+        fact-based mindset, but I am also a dreamer who
+        isn't afraid to bring unconventional and fun ideas
+        to the table. I thrive both in independent,
+        self-driven work and in coordinated team
+        environments, often stepping into leadership roles
+        during university projects by being a good listener
+        and a reliable collaborator.
+        When I am away from the keyboard, I stay active
+        by cycling and keep my problem-solving skills
+        sharp by solving the Rubik's cube.
+      </p>
+      <ul class="skills-list">
+        <li>C/C++</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>Rust</li>
+      </ul>
+    </div>
+    <div class="about-right">
+      <div class="leetcode-widget">
+        <div class="leetcode-header">
+          <span>LeetCode Progress</span>
+          <span class="leetcode-username"></span>
         </div>
         
-        <nav class="nav-links">
-            <a href="#home">Home</a>
-            <div class="nav-divider"></div>
-            <a href="#projects">Projects</a>
-            <div class="nav-divider"></div>
-            <a href="#about">About me</a>
-        </nav>
-
-        <div class="nav-cta">
-            <a href="mailto:vladgdragan@gmail.com" class="btn-sm">Contact</a>
-        </div>
-    </header>
-
-    <section class="hero-parallax">
-        <div class="layer layer-bg"></div>
-        <div class="layer layer-content">
-            <div class="hero-inner">
-                <h1>Driven by relentless curiosity</h1>
-                <p>I engineer high-impact solutions that bridge the gap between complex problems and seamless efficiency</p>
+        <div class="leetcode-container">
+          <svg class="leetcode-ring" viewBox="0 0 120 120">
+            <circle class="leetcode-bg easy-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="leetcode-bg med-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="leetcode-bg hard-bg" cx="60" cy="60" r="52"></circle>
+            <circle class="leetcode-easy-ring" cx="60" cy="60" r="52"></circle>
+            <circle class="leetcode-medium-ring" cx="60" cy="60" r="52"></circle>
+            <circle class="leetcode-hard-ring" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="leetcode-ring-text">
+            <div class="leetcode-total-solved">
+              <span id="leetcode-solved">0</span><span id="leetcode-all">/4047</span>
             </div>
-            <div class="entrance-lip"></div>
+            <div class="leetcode-label">Solved</div>
+          </div>
         </div>
-        
-    </section>
 
-    <section class="next-level">
-        <div class="dashboard-container">
-            <div class="metrics-row">
-                <div class="card metric"><span class="num">32</span><span class="lbl">Total Projects</span></div>
-                <div class="card metric completed"><span class="num">7</span><span class="lbl">Completed</span></div>
-                <div class="card metric progress"><span class="num">15</span><span class="lbl">In Progress</span></div>
-                <div class="card metric hold"><span class="num">5</span><span class="lbl">At Risk / Hold</span></div>
-            </div>
-            
-            <div class="main-grid">
-                <div class="card chart-card">
-                    <h3>Project Status</h3>
-                    <div class="chart-wrapper"><canvas id="projectChart"></canvas></div>
-                </div>
-                <div class="card tasks-card">
-                    <h3>Tasks By Status</h3>
-                    <div class="task-rows">
-                        <div class="task-row">
-                            <div class="task-meta"><span>Project Active</span><span>57%</span></div>
-                            <div class="bar-bg"><div class="bar-fill" data-target="89" style="background:#00dff3"></div></div>
-                        </div>
-                        <div class="task-row">
-                            <div class="task-meta"><span>Automation Queue</span><span>85%</span></div>
-                            <div class="bar-bg"><div class="bar-fill" data-target="100" style="background:#fcf1e5"></div></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card checklist-card">
-                    <div class="card-header">
-                        <h3>Email Notification Rules</h3>
-                        <button id="openRuleModal" class="btn-sm" type="button">+ New Rule</button>
-                    </div>
-                    <div class="rules-list" id="ruleList">
-                        <!-- Dinamically populated via JS -->
-                    </div>
-                </div>
-                <div id="ruleModal" class="modal">
-                    <div class="modal-content card">
-                        <h3>Add Checklist Trigger</h3>
-                        <form id="ruleForm">
-                            <div class="form-group">
-                                <label>Category Label</label>
-                                <input type="text" id="ruleCategory" placeholder="e.g. URGENT" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Match Target</label>
-                                <select id="ruleField">
-                                    <option value="from">Sender (From)</option>
-                                    <option value="subject">Subject Line</option>
-                                    <option value="body">Email Body</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Keyword / Value</label>
-                                <input type="text" id="ruleValue" placeholder="e.g. security@target.com" required>
-                            </div>
-                            <div class="modal-actions">
-                                <button type="button" id="closeRuleModal" class="btn-sm">Cancel</button>
-                                <button type="submit" class="btn-sm btn-accent">Save Rule</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="leetcode-stats">
+          <div class="leetcode-stat easy">
+            <span class="leetcode-label">Easy</span>
+            <span class="leetcode-num">0/963</span>
+          </div>
+          <div class="leetcode-stat medium">
+            <span class="leetcode-label">Med.</span>
+            <span class="leetcode-num">0/2111</span>
+          </div>
+          <div class="leetcode-stat hard">
+            <span class="leetcode-label">Hard</span>
+            <span class="leetcode-num">0/973</span>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
-    <script src="js/index.js"></script>
+  <svg width="0" height="0" class="svg-filters" aria-hidden="true">
+    <filter id="water-ripple">
+      <feTurbulence type="fractalNoise" baseFrequency="0.001 0.001" numOctaves="2" result="turbulence" id="ripple-turb" />
+      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="0" xChannelSelector="R" yChannelSelector="G" id="ripple-disp" />
+    </filter>
+  </svg>
+
+  <!-- FOOTER REVEAL -->
+  <div class="footer-wrapper" id="footer-wrap">
+    <div class="footer-bg">
+      <div class="fog-layer"></div>
+      <div class="water-layer"></div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-name">
+        <h2>Vlad Dragan</h2>
+      </div>
+      <div class="footer-devider"></div>
+      <div class="footer-social">
+        <a href="https://github.com/dragan-vlad" target="_blank" class="social-card" id="github">
+          <div class="social-icon"></div>
+          <span>GitHub</span>
+        </a>
+        <a href="https://linkedin.com/in/dragan-vlad-b2b792285" target="_blank" class="social-card" id="linkedin">
+          <div class="social-icon"></div>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://x.com/ ""USERNAME""" target="_blank" class="social-card" id="twitter">
+          <div class="social-icon"></div>
+          <span>X</span>
+        </a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- JS -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+
 </body>
+
 </html>

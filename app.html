@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+
+  <link rel="preconnect"  href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Syne:wght@700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" fhre="css/tree.css">
+  <link rel="stylesheet" href="css/wallet.css">
+  <link rel="stylesheet" href="css/rubiks.css">
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar"></nav>
+  
+  <!-- MAIN -->
+  <main class="dashboard-main" id="main-content"></main>
+
+  <!-- CONTEXT MENU -->
+  <div id="node-ctx"></div>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div id="modal-node" class="modal-panel" style="display: none;">
+      <input type="text" placeholder="Node Name">
+      <div class="swatches">
+        <div class="color-swatch sel" data-color="#7fff6e" onclick="pickColor(this)"></div>
+        <div class="color-swatch" data-color="#ff6e6e" onclick="pickColor(this)"></div>
+        <div class="color-swatch" data-color="#6ebaff" onclick="pickColor(this)"></div>
+        <div class="color-swatch" data-color="#ffd96e" onclick="pickColor(this)"></div>
+      </div>
+    </div>
+    
+    <div id="modal-cal" class="modal-panel" style="display: none;">
+      <input type="text" placeholder="Calisthenics Entry">
+    </div>
+    
+    <div id="modal-lang" class="modal-panel" style="display: none;">
+      <input type="text" placeholder="Language Entry">
+    </div>
+    
+    <div id="modal-lc" class="modal-panel" style="display: none;">
+      <input type="text" placeholder="LeetCode Entry">
+    </div>
+    
+    <div id="modal-code" class="modal-panel" style="display: none;">
+      <input type="text" placeholder="Coding Entry">
+    </div>
+    
+    <div id="modal-cyber" class="modal-panel" style="display: none;">
+      <input type="text" placeholder="Cybersecurity Entry">
+    </div>
+    
+    <div id="modal-habit" class="modal-panel" style="display: none;">
+      <input type="text" placeholder="Habit Entry">
+    </div>
+
+    <div id="rubiks" class="page-section" style="display: none;">
+      <div class="page-header">
+        <div class="page-title">
+          <div class="accent-line" style="background:#ffd56e"></div>
+          Rubik's Cube
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-ghost btn-sm" onclick="exportRubiks()">Export JSON</button>
+        </div>
+      </div>
+
+      <div class="rubiks-tabs">
+        <div class="rubiks-tab active" onclick="switchRubiksTab('OLL')">OLL</div>
+        <div class="rubiks-tab" onclick="switchRubiksTab('PLL')">PLL</div>
+        <div class="rubiks-tab" onclick="switchRubiksTab('F2L')">F2L</div>
+      </div>
+
+      <div class="rubiks-stats" id="rubiks-stats"></div>
+
+      <div class="rubiks-grid" id="rubiks-grid"></div>
+    </div>
+
+    <div id="wallet" class="page-section" style="display: none;">
+      <div class="page-header">
+        <div class="page-title">
+          <div class="accent-line" style="background:#ffd56e"></div>
+          Wallet
+        </div>
+      </div>
+
+      <div class="wallet-summary" id="wallet-summary" onclick="toggleWalletExpand()">
+        <div class="wallet-summary-grid">
+          <div class="wallet-stat"><div class="wallet-stat-value" id="w-total-cash">—</div><div class="wallet-stat-label">Total Cash</div></div>
+          <div class="wallet-stat"><div class="wallet-stat-value" id="w-total-invested">—</div><div class="wallet-stat-label">Total Invested</div></div>
+          <div class="wallet-stat"><div class="wallet-stat-value" id="w-current-value">—</div><div class="wallet-stat-label">Current Value</div></div>
+          <div class="wallet-stat"><div class="wallet-stat-value" id="w-gain-loss">—</div><div class="wallet-stat-label">Gain / Loss</div></div>
+          <div class="wallet-stat"><div class="wallet-stat-value" id="w-budget-status">—</div><div class="wallet-stat-label">Budget Status</div></div>
+        </div>
+        <div class="wallet-expand-hint">Click to expand ▼</div>
+      </div>
+
+      <div class="wallet-expanded" id="wallet-expanded" style="display:none">
+        <div class="wallet-tabs">
+          <div class="wallet-tab active" onclick="switchWalletTab('budget')">Budget</div>
+          <div class="wallet-tab" onclick="switchWalletTab('eom')">End of Month</div>
+          <div class="wallet-tab" onclick="switchWalletTab('transactions')">Transactions</div>
+          <div class="wallet-tab" onclick="switchWalletTab('wallets')">Wallets</div>
+          <div class="wallet-tab" onclick="switchWalletTab('salary')">Salary</div>
+          <div class="wallet-tab" onclick="switchWalletTab('goals')">Capital Goals</div>
+        </div>
+        <div class="wallet-tab-content" id="wallet-tab-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

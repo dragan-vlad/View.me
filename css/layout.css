@@ -1,0 +1,349 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 10%;
+    background: rgba(1, 4, 25, 0.92);
+    backdrop-filter: blur(16px);
+    z-index: 1000;
+}
+ 
+.navbar::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: linear-gradient(to bottom, rgba(1, 4, 25, 0.25), transparent);
+    pointer-events: none;
+}
+
+.brand-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+ 
+.nav-links a {
+    text-decoration: none;
+    color: var(--secondary);
+    margin: 0 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.3s;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+ 
+.nav-links a:hover {
+    color: var(--text);
+    cursor: pointer;
+}
+
+.nav-divider {
+    width: 1px;
+    height: 15px;
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.nav-cta {
+  display: flex;
+  align-items: center;
+}
+
+.hero-parallax {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    perspective: 1000px;
+    z-index: 1;
+    background-color: var(--bg);
+    margin-bottom: -1px;
+}
+
+.layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ 
+.layer-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/bg-photo.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    will-change: transform opacity;
+    backface-visibility: hidden;
+    pointer-events: none;
+    opacity: 1;
+}
+ 
+.layer-content {
+    position: relative;
+    z-index: 10;
+    transform: translateZ(100px);
+    /* Brings text forward in 3d space */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    will-change: transform, opacity;
+    isolation: isolate;
+}
+
+.hero-inner {
+    background: transparent;
+    box-shadow: none;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.entrance-lip {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg);
+    z-index: 10;
+    box-shadow: 0 -50px 100px rgba(0, 223, 243, 0.1);
+    border-top: 1px solid rgba(0, 223, 243, 0.2);
+}
+
+.next-level {
+    position: relative;
+    z-index: 20;
+    background: var(--bg);
+}
+
+.dashboard-container {
+    padding: 8% 5% 4% 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 100vh;
+}
+
+.metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1.5rem;
+    flex-grow: 1;
+}
+
+.values-scrolly {
+    height: 150vh;
+    position: relative;
+    background: var(--bg);
+    overflow: visible;
+}
+ 
+.perspective-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+    overflow: hidden;
+}
+
+.parallax-words {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg);
+}
+
+.parallax-words-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.projects {
+  padding: 8% 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+.projects-header h2 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--text);
+}
+
+.card-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fan-card {
+  position: absolute;
+  width: 280px;
+  height: 380px;
+  cursor: pointer;
+  transform-origin: bottom center;
+  transition: transform 0.4s ease;
+}
+
+.fan-card:hover {
+  transform: translateY(-40px) rotate(0deg);
+}
+
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 8% 5%;
+  align-items: center;
+}
+
+.about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;  
+}
+
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.about-right {
+  display: flex;
+  justify-content: center;
+}
+
+.leetcode-widget {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+} 
+
+.leetcode-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.footer-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  clip-path: circle(var(--reveal, 0%) at 50% 50%);
+  will-change: clip-path;
+}
+
+.footer-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('../assets/footer-bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.fog-layer {
+  position: absolute;
+  top: 30%;
+  left: -50%;
+  width: 200%;
+  height: 40%;
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+  filter: blur(20px);
+  animation: fogMove 20s linear infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes fogMove {
+  0% { transform: translateX(0) scale(1); }
+  100% { transform: translateX(10%) scale(1.2); }
+}
+
+.water-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+   
+  transform-origin: bottom center;
+}
+
+.footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 6rem 5%;
+  background: rgba(1, 7, 42, 0.4);
+  backdrop-filter: blur(4px);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-devider {
+  width: 200px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.footer-social {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;  
+}
+
+.social-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}

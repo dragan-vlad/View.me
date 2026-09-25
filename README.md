@@ -15,6 +15,8 @@ A unified, minimalist landing page and personal ecosystem backend. Powered by an
 
 ## Current System State
 * [x] **Static Server & Frontend:** Host dashboard static files and exercises graph endpoints (`/api/exercises`).
+* [x] **Frontend Architecture:** Modular ES6 JavaScript ecosystem with scoped CSS, local storage state persistence, and dynamic DOM routing.
+* [x] **Dashboard Modules:** Fully functional, offline-first UI modules for Calisthenics progress tracking, Coding tracking, Cybersecurity progress and projects tracking, Habits checklist, Languages tracking, Finance tracking (Wallet) and 3x3 Rubik's Cube algorithm training.
 * [x] **Real-Time Mail Watcher Subsystem:** Integrated async IMAP IDLE listener executing background email category checks.
 * [x] **Dynamic Rule Engine:** Exposed `/api/mail-checklist` GET and POST routes to read/modify mail evaluation parameters in real time.
 * [x] **Interactive Rule Control Panel:** Glassmorphism UI modal allowing real-time creation, toggling, and deletion of active email triggers directly synced with `data/mail-checklist.json`.
@@ -49,17 +51,28 @@ Open your browser or Ctr+click / Cmd+click on the terminal link to open in your 
 
 ## To Do:
 
-- [ ] Sketch and map out the full calisthenics skill progression data points inside `commands.json`.
+- [ ] Polish and finalize CSS grid layouts for the Wallet and Rubik's modules.
+- [ ] Implement native SVG rendering for Rubik's cases.
+- [ ] Build chart visualizations for Wallet asset distribution and End of Month history.
+
+- [ ] Develop Rust REST API endpoints (/api/wallet, /api/rubiks) to transition from localStorage to permanent backend state.
+- [ ] Wire the offline-first Wallet and Rubik's modules to the Rust Axum backend for permanent database persistence.
+- [ ] Integrate an automated currency conversion micro-daemon for accurate USD/CHF end-of-month snapshots.
+- [ ] Implement a lightweight analytics layer to visually map workout performance trends, volume tracking, and historical skill execution data.
+
+- [x] Seamlessly merge this landing page to another dashboard project.
 - [ ] Connect the frontend landing page to dynamically pull project card data from the `/api/exercises`.
-- [ ] Build the JavaScript visualization canvas to render calisthenics exercises as an interactive multi-parent graph web.
-- [ ] Seamlessly merge this landing page to another dashboard project.
 - [ ] Implement local folder-tiling structural views for easier dashboard navigation.
+- [ ] Refactor the core landing page layout into a production-grade showcase, integrating custom viewport cursor trackers and layered parallax depth effects.
+
+
+- [ ] Sketch and map out the full calisthenics skill progression data points inside `commands.json`.
+- [ ] Build the JavaScript visualization canvas to render calisthenics exercises as an interactive multi-parent graph web.
 - [ ] Integrate user tracking to mark movements as `unlocked` or `completed` in real time.
+- [ ] Design and implement a mobile-responsive daily logging module.
+
 - [ ] Build a modular language acquisition tracker featuring visual progress metrics, streak counts, and milestone validation bars.
 - [ ] Integrate a centralized script and automation database with advanced local query search and syntax-highlighted algorithm previews.
-- [ ] Refactor the core landing page layout into a production-grade showcase, integrating custom viewport cursor trackers and layered parallax depth effects.
-- [ ] Implement a lightweight analytics layer to visually map workout performance trends, volume tracking, and historical skill execution data.
-- [ ] Design and implement a mobile-responsive daily logging module.
 - [ ] Build a secure local authentication gate to safeguard personal logging inputs and private configuration dotfiles.
 - [ ] Connect the Rust backend to a dedicated storage array to architect a self-hosted, private cloud environment for personal file backups and asset streaming.
 - [ ∞ ] System Integration: Permanently embed this unified dashboard into my daily lifestyle as a central hub, continuous utility engine, and lifestyle maintenance ecosystem.

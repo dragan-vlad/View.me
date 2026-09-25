@@ -1,0 +1,137 @@
+.rubiks-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.rubiks-tab {
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text);
+  border: 1px solid rgba(198, 201, 230, 0.15);
+  transition: all 0.15s;
+}
+
+.rubiks-tab.active {
+  background: var(--glass);
+  color: var(--text);
+  border-color: rgba(198, 201, 230, 0.15);
+}
+
+.rubiks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minimax(280px, 1fr));
+  gap: 14px;
+}
+
+.rubiks-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.rubiks-card {
+  background: var(--glass);
+  border: 1px solid rgba(198, 201, 230, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rubiks-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rubiks-case-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rubiks-case-info {
+  flex: 1;
+}
+
+.rubiks-case-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.rubiks-case-desc {
+  font-size: 11px;
+  color: var(--secondary);
+  margin-top: 2px;
+}
+
+.rubiks-alg-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(198, 201, 230, 0.15);
+  background: var(--glass);
+  color: var(--text);
+  outline: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  transition: all 0.15s;
+}
+
+.rubiks-alg-input:focus {
+  border-color: var(--accent);
+}
+
+.rubiks-status-row {
+  display: flex;
+  gap: 6px;
+}
+
+.rubiks-status-btn {
+  flex: 1;
+  padding: 5px;
+  border-radius: 6px;
+  border: 1px solid rgba(198, 201, 230, 0.15);
+  background: transparent;
+  color: var(--secondary);
+  font-size: 10px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.rubiks-status-btn.active-not-learned {
+  border-color: var(--secondary);
+  color: var(--text);
+  background: var(--glass);
+}
+
+.rubiks-status-btn.active-in-progress {
+  border-color: #ff9f6e;
+  color: #ff9f6e;
+  background: rgba(255, 159, 110, 0.1);
+}
+
+.rubiks-status-btn.active-learned-slow {
+  border-color: #6eb4ff;
+  color: #6eb4ff;
+  background: rgba(110, 180, 255, 0.1);
+}
+
+.rubiks-status-btn.active-learned {
+  border-color: #ffd56e;
+  color: #ffd56e;
+  background: rgba(255, 213, 110, 0.1);
+}
