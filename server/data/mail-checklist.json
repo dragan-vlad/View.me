@@ -5,5 +5,12 @@
     "category": "MONEY",
     "match_field": "from",
     "match_value": "dedalus online"
+  },
+  {
+    "id": "test-rule-01",
+    "enabled": true,
+    "category": "System Test",
+    "match_field": "subject",
+    "match_value": "wojtech trigger"
   }
 ]

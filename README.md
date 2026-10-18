@@ -15,6 +15,7 @@ A unified, minimalist landing page and personal ecosystem backend. Powered by an
 
 ## Current System State
 * [x] **Static Server & Frontend:** Host dashboard static files and exercises graph endpoints (`/api/exercises`).
+* [x] **Secure Authentication Gate:** Implemented a PIN-based cookie authentication wall (`/login`) to protect the `/app` dashboard ecosystem.
 * [x] **Frontend Architecture:** Modular ES6 JavaScript ecosystem with scoped CSS, local storage state persistence, and dynamic DOM routing.
 * [x] **Dashboard UI Polish:** Consistent dark-themed glassmophism aestetic with BASIC responsive mobile scaling, a collapsible sidebar, and fluid CSS grid boundaries
 * [x] **Dashboard Modules:** Fully functional, offline-first UI modules for Calisthenics progress tracking, Coding tracking, Cybersecurity progress and projects tracking, Habits checklist, Languages tracking, Finance tracking (Wallet) and 3x3 Rubik's Cube algorithm training.
@@ -36,12 +37,7 @@ rustc --version
 
 ### Environment Variables
 To enable background mail daemon, export your credential before running the server: (recommended to use a .env file)
-```
-export TELEGRAM_BOT_TOKEN="your_bot_token"
-export TELEGRAM_CHAT_ID="your_chat_id"
-export IMAP_USER="your_email@gmail.com"
-export IMAP_PASS="your_app_password"
-```
+--> see `.env.example`
 
 ### How to run the server
 ```
@@ -58,7 +54,6 @@ Open your browser or Ctr+click / Cmd+click on the terminal link to open in your 
 
 - [ ] Develop Rust REST API endpoints (`/api/wallet`, `/api/rubiks`) to transition from localStorage to permanent backend state.
 - [ ] Wire the offline-first Wallet and Rubik's modules to the Rust Axum backend for permanent database persistence.
-- [ ] Build a secure local authentication gate to safeguard personal logging inputs and private configuration dotfiles.
 
 ### Frontend Features
 

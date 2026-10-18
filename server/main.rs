@@ -1,10 +1,11 @@
 use axum::{
-  extract::Json,
+  extract::{Json, Form},
   http::StatusCode,
-  response::IntoResponse,
+  response::{IntoResponse, Html, Redirect},
   routing::{get, post},
   Router,
 };
+use axum_extra::extract::cookie::{Cookie, CookieJar};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::env;
@@ -38,7 +39,7 @@ type SharedChecklist = Arc<Mutex<Vec<Rule>>>;
 
 #[tokio::main]
 async fn main() {
-  let serve_dir = ServeDir::new("../");
+  dotenvy::dotenv().ok();
 
   let initial_rules = load_checklist_from_file();
   let checklist_state: SharedChecklist = Arc::new(Mutex::new(initial_rules));
@@ -53,6 +54,13 @@ async fn main() {
   let state_for_routes = Arc::clone(&checklist_state);
 
   let app = Router::new()
+    .route("/", get(serve_index))
+    .route("/app", get(serve_app))
+    .route("/login", get(serve_login).post(login_handler))
+    .nest_service("/css", ServeDir::new("../css"))
+    .nest_service("/js", ServeDir::new("../js"))
+    .nest_service("/data", ServeDir::new("../data"))
+    .nest_service("/assets", ServeDir::new("../assets"))
     .route("/api/exercises", get(get_exercises))
     .route(
       "/api/mail-checklist",
@@ -61,9 +69,8 @@ async fn main() {
     .route(
       "/api/mail-checklist",
       post(move |body| update_checklist(Arc::clone(&checklist_state), body)),
-    )
-    .fallback_service(serve_dir);
-
+    );
+  
   let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
   let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
   println!("Server running at: http://localhost:3000");
@@ -167,6 +174,11 @@ async fn run_mail_listener(checklist: SharedChecklist) -> Result<(), Box<dyn std
       continue;
     }
 
+    let (idle_wait, _interrupt) = idle.wait();
+    if let Err(e) = idle_wait.await {
+      println!("[MAIL DAEMON] IDLE connection dropped: {}. Reconnecting...", e);
+      continue;
+    }
     let tcp_stream = tokio::net::TcpStream::connect(&addr).await?;
     let tls_stream = tokio_tls.connect(&imap_server, tcp_stream).await?;
     let client = async_imap::Client::new(tls_stream.compat());
@@ -248,4 +260,60 @@ async fn send_telegram(category: &str, sender: &str, subject: &str) -> Result<()
   let url = format!("https://api.telegram.org/bot{}/sendMessage", token);
   client.post(&url).json(&payload).send().await?;
   Ok(())
+}
+
+async fn serve_index() -> impl IntoResponse {
+  match fs::read_to_string("../index.html") {
+    Ok(html) => Html(html).into_response(),
+    Err(_) => (StatusCode::NOT_FOUND, "index.html not found").into_response(),
+  }
+}
+
+async fn serve_app(jar: CookieJar) -> impl IntoResponse {
+  let expected_pin = env::var("APP_PIN").unwrap_or_else(|_| "1234".to_string());
+
+  if let Some(cookie) = jar.get("auth_pin") {
+    if cookie.value() == expected_pin {
+      return match fs::read_to_string("../app.html") {
+        Ok(html) => Html(html).into_response(),
+        Err(_) => (StatusCode::NOT_FOUND, "app.html not found").into_response(),
+      };
+    }
+  }
+  Redirect::to("/login").into_response()
+}
+
+async fn serve_login() -> impl IntoResponse {
+  Html(r#"
+      <!DOCTYPE html>
+      <html lang="en">
+      <head><title>Wojtech Auth</title></head>
+      <body style="background:#01072a; display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif;">
+        <form method="POST" action="/login" style="display:flex; flex-direction:column; gap:16px; background:rgba(255,255,255,0.03); padding:32px; border-radius:16px; border:1px solid rgba(255,255,255,0.08);">
+          <h2 style="color:#fcf1e5; margin:0; text-align:center;">Enter PIN</h2>
+          <input type="password" name="pin" autofocus style="padding:12px; border-radius:8px; border:1px solid #00dff3; background:transparent; color:#fff; outline:none;">
+          <button type="submit" style="padding:12px; background:#00dff3; color:#01072a; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Unlock</button>
+        </form>
+      </body>
+      </html>
+    "#)
+}
+
+#[derive(Deserialize)]
+struct LoginPayload {
+  pin: String,
+}
+
+async fn login_handler(jar: CookieJar, Form(payload): Form<LoginPayload>) -> impl IntoResponse {
+  let expected_pin = env::var("APP_PIN").unwrap_or_else(|_| "1234".to_string());
+
+  if payload.pin == expected_pin {
+    let cookie = Cookie::build(("auth_pin", payload.pin))
+      .path("/")
+      .http_only(true)
+      .build();
+    (jar.add(cookie), Redirect::to("/app")).into_response()
+  } else {
+    (jar, Redirect::to("/login")).into_response()
+  }
 }
