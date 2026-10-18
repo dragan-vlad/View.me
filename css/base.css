@@ -4,6 +4,8 @@
   --accent: #00dff3;
   --secondary: #c6c9e6;
   --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glow: 0 0 20px rgba(0, 223, 243, 0.15);
 }
 
 * {

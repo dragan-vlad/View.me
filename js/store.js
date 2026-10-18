@@ -1,6 +1,6 @@
 import { DN_CAL, DN_CYBER, DN_CODE, DN_HABITS, DN_LANG } from './data.js';
 
-export const SK = 'wings_data';
+export const SK = 'wojtech_data';
 
 export let D = {
   cal: [],

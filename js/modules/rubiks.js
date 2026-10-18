@@ -1,14 +1,14 @@
 import { save } from "../store.js";
 
 let rubiksData = null;
-let activeTab = 'OLL';
+let activeTab = 'F2L';
 let saveTimeout;
 
 async function loadRubiksData() {
   if (rubiksData) {
     return rubiksData;
   }
-  const stored = localStorage.getItem('wings_rubiks');
+  const stored = localStorage.getItem('wojtech_rubiks');
   if (stored) {
     rubiksData = JSON.parse(stored);
     return rubiksData;
@@ -16,7 +16,7 @@ async function loadRubiksData() {
   try {
     const res = await fetch('../../server/data/rubiks.json');
     rubiksData = await res.json();
-    localStorage.setItem('wings_rubiks', JSON.stringify(rubiksData));
+    localStorage.setItem('wojtech_rubiks', JSON.stringify(rubiksData));
     return rubiksData;
   } catch (err) {
     return {
@@ -25,6 +25,29 @@ async function loadRubiksData() {
       F2L: []
     };
   }
+}
+
+function generateCubeSVG(id) {
+  if (!id) {
+    return;
+  }
+  const hash = id.toString().split('').reduce((a,b) => {
+    a = ((a << 5) - a) + b.charCodeAt(0);
+    return a & a;
+  }, 0);
+  let rects = '';
+
+  for(let i=0;i<9;i++) {
+    const x = (i % 3) * 16 + 2;
+    const y = Math.floor(i / 3) * 16 + 2;
+
+    const isYellow = ((Math.abs(hash) >> i) & 1) ===1;
+    const fill = isYellow ? '#ffd56e' : 'transparent';
+    const stroke = isYellow ? '#ffd56e' : 'var(--secondary)';
+
+    rects += `<rect x="${x}" y="${y}" width="14" height="14" rx="2" fill="${fill}" srtoke="${stroke}" stroke-width="1.5" opacity="${isYellow ? '0.8' : '0.3'}"/>`;
+  }
+  return `<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">${rects}</svg>`;
 }
 
 export async function renderRubiks() {
@@ -77,13 +100,7 @@ export async function renderRubiks() {
       <div class="rubiks-card" id="r-card-${item.id}">
         <div class="rubiks-card-header">
           <div class="rubiks-case-img">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--secondary)" stroke-width="2">
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="3" y1="9" x2="21" y2="9"></line>
-              <line x1="3" y1="15" x2="21" y2="15"></line>
-              <line x1="9" y1="3" x2="9" y2="21"></line>
-              <line x1="15" y1="3" x2="15" y2="21"></line>
-            </svg>
+            ${generateCubeSVG(item.id)}
           </div>
           <div class="rubiks-case-info">
             <div class="rubiks-case-name">${item.name}</div>
@@ -103,9 +120,12 @@ export async function renderRubiks() {
 }
 
 export function switchRubiksTab(tab) {
-  actievTab = tab;
+  if (!tab) {
+    return;
+  }
+  activeTab = tab;
   document.querySelectorAll('.rubiks-tab').forEach(element => {
-    if (element.textContent.trim() === tab) {
+    if (element.getAttribute('onclick').includes(tab)) {
       element.classList.add('active');
     } else {
       element.classList.remove('active');
@@ -124,7 +144,7 @@ export function saveRubiksAlg(id, alg) {
     const item = list.find(i => i.id === id);
     if (item) {
       item.alg = alg;
-      localStorage.setItem('wings_rubiks', JSON.stringify(rubiksData));
+      localStorage.setItem('wojtech_rubiks', JSON.stringify(rubiksData));
     }
   }, 400);
 }
@@ -137,7 +157,7 @@ export function setRubiksStatus(id, status) {
   const item = list.find(i => i.id === id);
   if (item) {
     item.status = status;
-    localStorage.setItem('wings_rubiks', JSON.stringify(rubiksData));
+    localStorage.setItem('wojtech_rubiks', JSON.stringify(rubiksData));
     renderRubiks();
   }
 }
@@ -151,7 +171,7 @@ export function exportRubiks() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'wings_rubiks.json';
+  a.download = 'wojtech_rubiks.json';
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

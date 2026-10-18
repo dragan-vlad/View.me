@@ -210,3 +210,69 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+export function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('mobile-overlay');
+  if (sidebar && overlay) {
+    sidebar.classList.toggle('open');
+    sidebar.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+}
+
+export function exportWojtech() {
+  const fullConfig = {
+    core: JSON.parse(localStorage.getItem('wojtech_data') || '{}'),
+    wallet: JSON.parse(localStorage.getItem('wojtech_wallet') || '{}'),
+    rubiks: JSON.parse(localStorage.getItem('wojtech_rubiks') || '{}')
+  };
+
+  const dataStr = JSON.stringify(fullConfig, null, 2);
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `wojtech_backup_${new Date().toISOString().split('T')[0]}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+export function importWojtech(event) {
+  if (!event) {
+    return;
+  }
+  const file = event.target.files[0];
+  if (!file) {
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    try {
+      const data = JSON.parse(event.target.result);
+      if (data.core) {
+        localStorage.setItem('wojtech_data', JSON.stringify(data.core));
+      }
+      if (data.wallet) {
+        localStorage.setItem('wojtech_wallet', JSON.stringify(data.wallet));
+      }
+      if (data.rubiks) {
+        localStorage.setItem('wojtech_rubiks', JSON.stringify(data.rubiks));
+      }
+
+      alert('Wojtech config imported succesfully! Reloading...');
+      location.reload();
+    } catch (err) {
+      alert('Invalid JSON file. Please ensure it is a valid Wojtech backup');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+window.toggleSidebar = toggleSidebar;
+window.exportWojtech = exportWojtech;
+window.importWojtech = importWojtech;

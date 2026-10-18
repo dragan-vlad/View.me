@@ -1,5 +1,5 @@
 export function initWallet() {
-  const stored = localStorage.getItem('wings_wallet');
+  const stored = localStorage.getItem('wojtech_wallet');
   if (!stored) {
     const defaultData = {
       summary: {
@@ -20,12 +20,12 @@ export function initWallet() {
       salary: [],
       goals: {}
     };
-    localStorage.setItem('wings_wallet', JSON.stringify(defaultData));
+    localStorage.setItem('wojtech_wallet', JSON.stringify(defaultData));
   }
 }
 
 function getWalletData() {
-  return JSON.parse(localStorage.getItem('wings_wallet'));
+  return JSON.parse(localStorage.getItem('wojtech_wallet'));
 }
 
 export function renderWallet() {

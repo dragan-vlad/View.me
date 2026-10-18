@@ -1,3 +1,21 @@
+/* --- Master Layout Wrappers --- */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  min-width: 320px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 32px 48px;
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
 .navbar {
     position: fixed;
     top: 0;
@@ -346,4 +364,213 @@
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
+}
+
+/* Sidebar & Nav Styling */
+.sidebar {
+  width: 280px;
+  background: rgba(1, 7, 42, 0.4);
+  backdrop-filter: blur(16px);
+  border-right: 1px solid var(--glass-border);
+  padding: 32px 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-logo h2 {
+  font-family: 'Syne', sans-serif;
+  color: var(--text);
+  padding: 0 24px;
+  margin-bottom: 32px;
+  text-shadow: var(--glow);
+  font-size: 24px;
+}
+
+.nav-header {
+  padding: 24px 24px 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--secondary);
+}
+
+.nav-link {
+  display: block;
+  padding: 12px 24px;
+  color: var(--secondary);
+  text-decoration: none;
+  border-right: 3px solid transparent;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--text);
+  background: var(--glass);
+  border-right-color: var(--accent);
+  text-shadow: var(--glow);
+}
+
+/* Page Sections & Headers */
+.page-section {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 32px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px 0 rgba(1, 7, 42, 0.5);
+  transition: box-shadow 0.3 ease, border-color 0.3s ease;
+}
+
+.page-section:hover {
+  box-shadow: 0 8px 32px 0 rgba(1, 7, 42, 0.5), var(--glow);
+  border-color: rgba(0, 223, 243, 0.2);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;;
+}
+
+.page-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.accent-line {
+  width: 4px;
+  height: 24px;
+  border-radius: 2px;
+}
+
+/* Mobile Responsive Layout */
+.mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--glass);
+  z-index: 40; 
+}
+
+.mobile-overlay{
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(1, 7, 42, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 45;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+#import-file {
+  display: none;
+}
+
+.top-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.modal-panel, #rubiks, #wallet, #wallet-expanded {
+  display: none;
+}
+
+.rubiks-section .accent-line, .wallet-section .accent-line {
+  background: #ffd56e;
+}
+
+.mobile-title {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  .dashboard-main {
+    padding: 16px;
+    height: auto;
+  }
+  .mobile-header {
+    display: flex;
+  }
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    bottom: 0;
+    z-index: 50;
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  #sidebar.open {
+    transform: translateX(280px);
+  }
+  .page-section {
+    padding: 20px 16px;
+  }
+  .tree-node {
+    padding: 12px 16px !important;
+    font-size: 16px !important;
+  }
+  .tree-children {
+    padding-left: 24px !important;
+  }
+}
+
+.action-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.table-wrapper {
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  text-align: left;
+  font-size: 13px;
+  color: var(--text);
+  border-collapse: collapse;
+}
+
+.data-table th {
+  color: var(--secondary);
+  border-bottom: 12px;
+  border-radius: 1px solid rgba(198, 201, 230, 0.05);
+  font-weight: 500;
+}
+
+.data-table td {
+  padding: 12px 0;
+  border-radius: 1px solid rgba(198, 201, 230, 0.05);
+}
+
+.data-table tr.empty-state td {
+  color: var(--secondary);
+  padding-top: 16px;
+  border-bottom: none;
 }

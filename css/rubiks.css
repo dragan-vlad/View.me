@@ -22,13 +22,13 @@
 
 .rubiks-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minimax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 14px;
 }
 
 .rubiks-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 14px;
   margin-bottom: 24px;
 }
@@ -134,4 +134,23 @@
   border-color: #ffd56e;
   color: #ffd56e;
   background: rgba(255, 213, 110, 0.1);
+}
+
+.rubiks-stat-card {
+  align-items: center;
+  padding: 16px;
+  text-align: center;
+}
+
+.rubiks-stat-val {
+  font-size: 20px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+}
+
+.rubiks-stat-label {
+  font-size: 10px;
+  margin-top: 4px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 1px;
 }
